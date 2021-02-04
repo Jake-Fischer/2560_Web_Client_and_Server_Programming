@@ -1,0 +1,28 @@
+ .tab-button{
+     background-color: blueviolet;
+     border: none;
+     padding: 10px;
+     margin: 1px;
+     outline: none;
+ }
+
+ .tab-button:hover{
+     background-color: violet;
+ }
+
+ .tab-button.active{
+     /* Only applied to element with class tab-button and class active */
+     background-color: violet;
+ }
+
+ #tabs{
+     background-color: gainsboro;
+     border: 1px solid violet;
+ }
+
+ .tab-content{
+     border-right: 1px solid violet;
+     border-left: 1px solid violet;
+     border-bottom: 1px solid violet ;
+     padding: 10px;
+ }
