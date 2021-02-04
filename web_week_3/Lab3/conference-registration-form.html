@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <Head>
+        <meta charset="UTF-8">
+        <title>Conference Registration Form</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="conference-registration-style.css" type="text/css">
+    </Head>
+
+    <body class="m-3">
+
+        <div class="jumbotron"> <!--doesn't seem to be working for some reason? Seems to just act like a regular h1 element?-->
+            <h1>Conference Registration</h1>
+        </div>
+
+        <div class="row"> <!--start of first row-->
+
+            <div class="col-md-5"> <!--start of first colum-->
+                <div class="ml-5">
+                <p>Join us, for our 42nd annual Conner Conference.</p>
+                <p>Connors around the world flock to this wonderful gathering of Conners, all are welcome!</p>
+                <P>Please, register and be a part of Connor history!</P>
+                </div>
+            </div> <!--end of first colum-->
+        
+            <div class="col-md-7"> <!--start of second colum-->
+                <form class="ml-5 mr-5">
+                    <label for="name">Name:</label>
+                    <input id="name" name = "name" type="text" class="form-control" maxlength="70" required>
+                    <br>
+
+                    <label for="password">Password:</label>
+                    <input id="password" name ="password" type="password" class="form-control" required>
+                    <br>
+
+                    <label for="email">Email:</label>
+                    <input id="email" name="email" type="email" class="form-control" required>
+                    <br>
+
+                    <label for="size_selection">Size:</label>
+                    <select id="size_selection" name="size_selection" class = "form-control" required>
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                    </select>
+                    <br>
+
+                    <label for="birth_date">Birthdate:</label>
+                    <input id="birth_date" name="birth_date" class="form-control" type="date">
+                    <br>
+
+                    <label for="email_updates">Would you like to recieve E-mail updates?</label>
+                    <div class="email_updates">
+                        <lable for="email_updates_yes">Yes</lable>
+                        <input id="email_updates_yes" name="email_updates" type="radio" checked required >
+                    </div>
+
+                    <div class="email_updates">
+                        <lable for="email_updates_no">No</lable>
+                        <input id="email_updates_no" name="email_updates" type="radio" required>
+                    </div>
+                    <br>
+
+                    <label for="morning_session">Morning:</label>
+                    <input id="morning_session" name="morning_session" type="checkbox">
+
+                    <label for="afternoon_session">Afternoon:</label>
+                    <input id="afternoon_session" name="afternoon_session" type="checkbox">
+                    <br>
+                    
+                    <label for="comments">Comments</label>
+                    <br>
+                    <textarea rows="7" cols="70" name="comments" id="comments" class="form-control" required> </textarea>
+                    <br>
+                    <div>
+                        <label for="submit"></label>
+                        <input type="submit" class="btn btn-primary mt-4" name="submit" id="submit" >
+                    </div>
+                </form>
+            </div> <!--end of second colum-->
+        </div> <!--end of first row-->
+
+    </body>
+</html>

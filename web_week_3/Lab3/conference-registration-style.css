@@ -1,0 +1,25 @@
+body{
+    background-color: #F8B195;
+    background-image: linear-gradient(to bottom right,  #F8B195,  #C06c84);
+    font-family: 'Poppins', sans-serif;;
+}
+
+.jumbotron{
+    background-color: #355c75;
+    color:wheat;
+    font-family: 'Poppins', sans-serif;
+}
+
+input{
+    color: #6c5b7b;
+}
+
+.col-md-7{
+    background-color:#6c5b7b;
+    border-top-left-radius: 20px;
+    border-radius: 20px;
+}
+
+#grad {
+    background-image: linear-gradient(to bottom right, #6c5b7b,  #F8B195);
+  }

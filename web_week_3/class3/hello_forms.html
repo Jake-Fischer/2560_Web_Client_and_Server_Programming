@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <Head>
+        <meta charset="UTF-8">
+        <title>Hello Forms</title>
+    </Head>
+    <body>
+        <form>
+        <label for="username">Enter your name:</label>
+
+        <input id="username" type="text">
+
+        <input type="number" value="0">
+
+        <textarea rows="15" cols="50"> Default Text Here</textarea>
+
+        <select>
+            <option>One</option>
+            <option>Two</option>
+            <option>Three</option>
+            <option>Four</option>
+        </select>
+        <br>
+
+        <label>Delivery or pickup</label>
+        <input name="delivery-method" type="radio" checked ><lable>Delivery</lable>
+        <input name="delivery-method" type="radio"><lable>Pickup</lable>
+        <br>
+
+        <label>Now or Later?</label>
+        <input id = "delivery-now" name="delivery-time" type="radio" checked >
+        <lable for="delivery-now">Now</lable>
+        <input id = "delivery-later" name="delivery-time" type="radio">
+        <lable for="delivery-later">Later</lable>
+
+        <input type="checkbox" checked>
+        <input type="submit">
+        </form>
+
+    </body>
+</html>

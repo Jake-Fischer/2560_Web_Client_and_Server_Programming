@@ -1,0 +1,87 @@
+body{
+    background-color: tan;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+h1 {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+}
+
+h2{
+    font-size: 30px;
+}
+
+p{
+    color: grey;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+li {
+    list-style-type: square;
+    margin: 5px;
+    padding: 5px;
+}
+
+a{
+    color:blueviolet;
+    text-decoration:none ;
+}
+
+ul{
+    background-color: whitesmoke
+}
+
+#most-favorite{
+    background-color: tomato;
+    text-decoration: underline;
+}
+
+.second-favorite{
+    background-color: blueviolet
+}
+
+#page-title{
+    text-shadow: 4px 4px black;
+    font-size: 40px;
+}
+
+#favorite-music-name{
+    color:purple;
+    font-family: cursive;
+}
+
+#favorite-movie-title{
+    color: brown;
+}
+
+.favorite-section{
+    background-color: bisque;
+    border: 3px black double;
+    margin: 10px;
+    padding: 15px;
+
+}
+
+.favorite-image{
+    height: 50%;
+    width: 50%;
+    border-radius: 20px;
+}
+
+table, tr, th, td{
+    border: 1px black solid;
+    border-collapse: collapse;
+}
+
+th{
+    width: 100px;
+    background-color: grey;
+}
+
+td{
+    text-align: center;
+    background-color: whitesmoke;
+}

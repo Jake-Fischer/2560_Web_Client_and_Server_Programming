@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <Head>
+        <meta charset="UTF-8">
+        <title>Student Feedback Form</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="feedback-styles.css" type="text/css">
+    </Head>
+
+    <body class="m-3">
+
+        <div class="jumbotron">
+            <h1>Please provide feedback. You may do so anonymously.</h1>
+        </div>
+
+        <div class="row"> <!--start of first row-->
+
+            <div class="col-md-5"> <!--start of first colum-->
+                <div class="ml-5">
+                <p>As one of our valued students, your ideas and feedback are very important to us.</p>
+                <p>If you have any thoughts to share, please use this form to send it to us!</p>
+                <P>You can remain anonymous, or use contact info!</P>
+                </div>
+            </div> <!--end of first colum-->
+        
+            <div class="col-md-7"> <!--start of second colum-->
+                <form class="ml-5 mr-5">
+                    <label for="student_name">Enter your name:</label>
+                    <input id="student_name" name = "studnet_name" type="text" class="form-control">
+                    <br>
+
+                    <label for="student_email">Enter your Email:</label>
+                    <input id="student_email" name="student_email" type="email" class="form-control">
+                    <br>
+                    <br>
+
+                    <label for="comments">Comments</label>
+                    <br>
+                    <textarea rows="10" cols="50" name="comments" id="comments" class="form-control" required> </textarea>
+                    <br>
+
+                    <label>Are you a current student?</label>
+                    <div class="form-check">
+                        <input name="student_status" type="radio" checked >
+                        <lable for="student_status_yes" class="form-check-label">Yes</lable>
+                    </div>
+
+                    <div class="form-check">
+                        <input name="student_status" type="radio">
+                        <lable for="student_status_no" class="form-check-label">No</lable>
+                    </div>
+
+                    <br>
+                    <div>
+                        <label for="submit"></label>
+                        <input type="submit" class="btn btn-primary mt-4" name="submit" id="submit">
+                    </div>
+                </form>
+            </div> <!--end of second colum-->
+        </div> <!--end of first row-->
+
+    </body>
+</html>

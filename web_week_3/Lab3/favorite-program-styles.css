@@ -1,0 +1,25 @@
+.jumbotron{
+    text-align: center;
+    background-color: salmon;
+    font-family:'Roboto Mono', monospace;
+}
+
+.info{
+    text-align: center;
+    font-family:'Roboto Mono', monospace;
+}
+
+.code{
+    text-align: left;
+}
+
+#github-link{
+    text-align: left;
+    background-color: blanchedalmond;
+}
+
+body{
+    background-color: rosybrown;
+    border: black 50px;
+}
+

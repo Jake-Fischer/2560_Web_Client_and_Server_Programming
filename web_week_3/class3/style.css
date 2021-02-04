@@ -1,0 +1,18 @@
+h1{
+    text-align: center;
+}
+
+#real-alert{
+    color: red;
+}
+
+#test-only{
+    color: lightgreen;
+}
+
+.missile-link{
+    display: block;
+    background-color: black;
+    margin: 15px ;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}

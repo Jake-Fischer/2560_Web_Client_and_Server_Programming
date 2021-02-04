@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+</head>
+<body>
+
+    <!-- Write your HTML content here -->
+    <p>What is the capital of Wisconson?</p>
+
+    <button class='wrong-answer'>Bayfield</button>
+    <button id="correct-answer">Madison</button>
+    <button class='wrong-answer'>Milwaukee</button>
+
+    <p id="result"></p>
+
+
+<script>
+
+    // Write your script here
+    let correctAnswerButton = document.querySelector('#correct-answer')
+
+    let defaultButtonColor = correctAnswerButton.style.background
+
+    let result = document.querySelector('#result')
+
+    let wrongAnswerButtons = document.querySelectorAll('.wrong-answer')
+
+    // add event listener to both buttons
+
+    // FUNCTIONAL STYLE LOOP
+    // add an event listeners with a loop for wrong answer buttons
+    // wrongAnswerButtons.forEach(function(wrongAnswerButton) {
+    //   wrongAnswerButton.addEventListener('click', function(){
+    //     result.innerHTML = 'Wrong answer, try again.'
+    //     correctAnswerButton.style.background = defaultButtonColor
+    //   })
+    // })
+
+    //IMPERATIVE STYLE LOOP
+    for(let x = 0; x<wrongAnswerButtons.length;x++){
+      let wrongAnswerButton = wrongAnswerButtons[x]
+
+      wrongAnswerButton.addEventListener('click', function(){
+        result.innerHTML = 'Wrong answer, try again.'
+        correctAnswerButton.style.background = defaultButtonColor
+      })
+    }
+
+    // add event listener to one correct answer button
+    correctAnswerButton.addEventListener('click', function(){
+      result.innerHTML = 'Correct Answer'
+      correctAnswerButton.style.background = 'cyan'
+    })
+
+</script>
+
+</body>
+</html>

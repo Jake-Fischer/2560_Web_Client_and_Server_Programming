@@ -1,0 +1,74 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>My Favorite Program</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="favorite-program-styles.css" type="text/css">
+    </head>
+
+
+    <body>
+        <div class="jumbotron"> <!--doesn't seem to be working for some reason? Seems to just act like a regular h1 element?-->
+            <h1>Netflix Login and Pynput Fun</h1>
+        </div>
+        
+        <div class="info">
+        <p>This is a little project I was working on for an hour or two, mostly to try to learn about pynput, which lets you control the mouse and keyboard of a computer with python code</p>
+        <p>In this example, I use it to log into netflix from a browser (login info removed from examples of course). There might be practical applications for this to automate
+             tasks with websites that have bad/no APIs, but it would have serious limitations.</p>
+        <p>I think its a cool package though, and a cool example of what python can do.</p>
+        </div>
+
+        <div class="code">
+        <pre><code>
+        import pynput
+
+        from pynput.mouse import Button, Controller
+        from pynput.keyboard import Key
+        from pynput.keyboard import Controller as KeyController
+        import time
+
+        mouse = Controller()
+        keyboard = KeyController()
+
+        original_position = (mouse.position[0], mouse.position[1])
+        username_position = (2820, 352)
+        password_position = (2879, 417)
+        clear_position = (3067, 386)
+        sign_in_position = (2874, 496)
+
+        mouse.position = (username_position[0], username_position[1])
+        time.sleep(1)
+        mouse.click(Button.left, 3)
+        time.sleep(1)
+        keyboard.press(Key.backspace)
+        keyboard.release(Key.backspace)
+        time.sleep(1)
+        keyboard.type('')
+        time.sleep(1)
+        </code></pre>
+        </div>
+
+        <a id="github-link" href="https://github.com/Jake-Fischer/meh-ideas/blob/main/NetflixLogin.py">GitHub Link</a>
+        <br>
+        <br>
+
+        <div class="pictures">
+        <img class="code-image" src="netflixcode1.PNG" 
+            alt = "A picture of python code" 
+            title = "code-example-1" 
+            height = "600">
+            
+
+        <img class="code-image" src="netflixcode2.PNG" 
+            alt = "More python code, continued from the previous picture." 
+            title = "code-example-2" 
+            height = "600">
+        
+        </div>
+
+
+    </body>
+</html>
