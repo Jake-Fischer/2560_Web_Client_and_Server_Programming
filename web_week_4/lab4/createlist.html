@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>List Creator</title>
+</head>
+<body>
+
+    <!-- Setup input and button elements -->
+    <p>Add items to your list. 10 max. Character limit of 50.</p>
+    <input id='new-text'></input>
+    <button id='add-text'>Add</button>
+    <button id='clear'>Clear</button>
+
+    <!-- Create empty unordered list -->
+    <ul id='text-list'></ul>
+
+<script>
+
+    //Define variables
+    let textInput = document.querySelector('#new-text')
+    let addButton = document.querySelector('#add-text')
+    let textList = document.querySelector('#text-list')
+    let clearButton = document.querySelector('#clear')
+
+    let elementsInList = 0 //numbers of items in list
+    let maxElements = 10 //max amount of numbers in the list
+
+    // Click the addButton if user presses enter
+    document.addEventListener('keyup', function(){
+        if (event.keyCode == 13){
+            addButton.click()
+        }
+    })
+
+    // Evenet listener for addButton
+    addButton.addEventListener('click', function(){
+
+        //Read the text in input
+        let newText = textInput.value
+
+        if (newText.length == 0){ //Check for text
+            // Ignore null input
+            return
+        } else if (newText.length >50){ //Check text length
+            alert('Max length is 50 characters.')
+            return
+        } else if (elementsInList >= maxElements){ //Check list length
+            alert('No more elements can be added')
+            return
+        } else { //Add to list
+            //Create a new li element from the text in the input
+            let newListItem = document.createElement('li')
+            newListItem.innerHTML = newText
+
+            //Add the new li element as a child of the ul element
+            textList.appendChild(newListItem)
+
+            //Clear the text in the input
+            textInput.value = ''
+
+            //increase count
+            elementsInList++
+        }
+    })
+
+    // Clear button event listener, clears list and element counter
+    clearButton.addEventListener('click', function(){
+        textList.innerHTML = ''
+        elementsInList = 0
+    })
+
+</script>
+
+</body>
+</html>
