@@ -1,5 +1,6 @@
-html>
+<html>
     <head>
+        <script async defer src='extra_credit_question.js'></script>
 
     </head>
 
@@ -24,7 +25,7 @@ html>
             let analyzeButton = document.querySelector('#analyze')
             let usernameInput = document.querySelector('#github-username')
 
-            let ResultsPara = document.querySelector("#results") //New
+            let resultsPara = document.querySelector("#results") //New
 
             analyzeButton.addEventListener('click', function() {
                 let username = usernameInput.value
@@ -32,9 +33,18 @@ html>
                 fetch(url)   // make request to URL
                 .then(response => response.json())  // extract the JSON from the response 
                 .then(githubJson => {   
-                    console.log(githubJson)   // JSON available here
+                    console.log(githubJson) // JSON available here
                     // TODO analyze the JSON
+                    let languageCounts = analyze_repo(githubJson)
+                    console.log(languageCounts)
                     // TODO create elements on page to display the languages used and each languages' frequency
+                    
+                    for (language in languageCounts){
+                        let paragraph = document.createElement('p')
+                        paragraph.innerHTML = `${language}: ${languageCounts[language]}`
+                        resultsPara.append(paragraph)
+                    }
+
                 })
                 .catch(error => {    // handle errors that occur when requesting data or processing the response
                     console.log(error)
