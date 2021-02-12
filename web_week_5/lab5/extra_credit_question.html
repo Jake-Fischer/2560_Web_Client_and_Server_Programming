@@ -1,0 +1,48 @@
+html>
+    <head>
+
+    </head>
+
+    <body>
+
+        <div>
+            <h1>GitHub Repository Programming Language Analysis</h1>
+
+            <label for="github-username">Enter GitHub Username</label>
+            <input id="github-username">
+            <button id="analyze">Analyze</button>
+                
+        </div>
+        <div>
+            <p id='results'></p>
+        </div>
+            
+        <!-- TODO Use JavaScript to display list of languages and frequencies -->
+
+        <script>
+       
+            let analyzeButton = document.querySelector('#analyze')
+            let usernameInput = document.querySelector('#github-username')
+
+            let ResultsPara = document.querySelector("#results") //New
+
+            analyzeButton.addEventListener('click', function() {
+                let username = usernameInput.value
+                let url = `https://api.github.com/users/${username}/repos`
+                fetch(url)   // make request to URL
+                .then(response => response.json())  // extract the JSON from the response 
+                .then(githubJson => {   
+                    console.log(githubJson)   // JSON available here
+                    // TODO analyze the JSON
+                    // TODO create elements on page to display the languages used and each languages' frequency
+                })
+                .catch(error => {    // handle errors that occur when requesting data or processing the response
+                    console.log(error)
+                    alert('Error fetching data from GitHub')
+                })
+            })
+
+
+        </script>
+    </body>
+</html>
