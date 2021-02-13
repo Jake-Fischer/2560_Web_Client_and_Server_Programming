@@ -65,8 +65,10 @@
     let treeTypeSelect = document.querySelector('#tree-type')
 
     // TODO create a variable for city input element
+    let cityInput = document.querySelector('#city')
     // TODO create a variable for zip code input element
-    
+    let zipcodeInput = document.querySelector('#zipcode') 
+
     let submitButton = document.querySelector('#submit-order')
 
     let orderSummaryParagraph = document.querySelector('#order-summary')
@@ -79,23 +81,59 @@
         let treeType = treeTypeSelect.value
 
         // TODO get the value from the input#city
+        let city = cityInput.value
         // TODO get the value from the input#zipcode
+        let zipcode = zipcodeInput.value
 
-        // TODO Validate that all six input and select elements have been completed
-
-        // TODO Validate the zipcode is in the range 55001 and 56763. This will check that the zip code is in Minnesota.
-
+        // Empty error array
         let errors = []
-        
         // If a form element has not been completed, add an error message to the errors array (use push)
 
-        
+        // TODO Validate that all six input and select elements have been completed
+        if (name <= 0){
+            errors.push("Please enter a valid name.")
+        } else if (houseNumber.length <= 0){
+            errors.push("Please enter a valid house number")
+        } else if (streetName.length <=0){
+            errors.push("Please enter a valid street name")
+        } else if (treeType == ""){                         //This part caused me some issues, I had a bug for a while because I only used one = sign. 
+                                                            //Was javascript assigning a new value of "" to treeType when I had it that way? That's weird because it's in the variables that are fed to the function.
+                                                            //Strange stuff.
+            errors.push("Please select a type of tree.")
+        } else if (city.length <= 0){
+            errors.push("Please enter your city.")
+        } else if (zipcode.length <=0){
+            errors.push("Please enter your zip code")
+        }
+        // TODO Validate the zipcode is in the range 55001 and 56763. This will check that the zip code is in Minnesota.
+        if (zipcode >=55001 && zipcode <= 56763){
+        } else{
+            errors.push("Please enter a valid Minnesota zipcode. (55001 - 56763")
+        }
+
         // TODO - If there are any errors after checking all of the elements, 
         // display an alert with all of the error messages (use join)
         // and then return from this function to prevent further processing 
-
-
+        if (errors.length > 0){
+            alert(errors.join(" "))
+            return
         // TODO - If there are no errors, use a template string to display an order summary in the order summary paragraph
+        } else{
+            //How would I add line breaks to this text, while keeping the `` template sring formatting? Is there a simple way, or would I have to use an array and loop?
+            orderSummaryParagraph.innerHTML =  `Thank you for your order, ${name}!
+            Your order will be processed shortly, then your tree will be on the way!
+            
+            
+            Please confirm that the following information is correct- 
+            Name: ${name} -
+            House Number: ${houseNumber} -
+            Street: ${streetName} -
+            Tree: ${treeType} -
+            City: ${city} -
+            Zipcode: ${zipcode}`
+        }
+        
+        
 
         
     })
