@@ -64,10 +64,10 @@ animals.forEach( function(animal){
 animals.push('alligator')
 
 //Create new array, with the lengths of the previous array
-animalLengths = []
+let animalLengths = []
 animals.forEach( function(animal){
     let animalLength = animal.length // Why does this work, even though I dont use 'let' to declare the variable?
-    let animalLengths.push(animalLength)
+    animalLengths.push(animalLength)
 })
 
 console.log(animalLengths)
