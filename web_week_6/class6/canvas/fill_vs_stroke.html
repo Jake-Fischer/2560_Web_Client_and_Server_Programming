@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fill vs. Stroke</title>
+
+  <style>
+
+    #fill_stroke_canvas {
+      border: 1px black solid;
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <canvas id="fill_stroke_canvas" height="300" width="300"></canvas>
+
+  <script>
+
+    let canvas = document.getElementById("fill_stroke_canvas")
+    let context = canvas.getContext("2d")
+
+    context.fillStyle = "#f00"
+    context.fillRect(20, 20, 100, 100)
+
+    context.strokeStyle = "#f00"
+    context.strokeRect(140, 140, 100, 100)
+
+  </script>
+
+</body>
+
+
+</html>
