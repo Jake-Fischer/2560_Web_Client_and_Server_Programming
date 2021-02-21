@@ -5,17 +5,25 @@
     <!-- Leaflet script and CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+    <!--Chart.js and link to my js code to make the chart-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <script async defer src="bridges_chart.js"></script>
     
-    <!-- Our stylesheet. Make sure the size of the map div is set before trying to draw the map.-->
+    <!--My stylesheet for the map and markers-->
     <link rel="stylesheet" type="text/css" href="longestUSbridgesstyle.css">
-    <!-- Our script, uses Leaflet to draw the maps and map components for this page  -->
+    <!--My script for the map and markers-->
     <script async defer src="bridges.js"></script>
 
 </head>
 <body>
-
+    <!--Organize page, and create a canvas for the chart-->
     <h1>Where are the longest bridges in the US?</h1>
     <div id="bridges-map"></div>
+
+    <h2>Unscientific survey of soda beverage preferences
+        <canvas id="bridges-chart">
+        </canvas> </h2>
 
 </body>
 </html>

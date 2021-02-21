@@ -1,82 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Mouse Events</title>
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>Mouse Events</title>
 
-  <style>
+    <style>
 
-    #canvas {
-      border: 1px black solid;
-    }
+      #canvas {
+        border: 1px black solid;
+      }
 
-  </style>
+    </style>
 
-</head>
-<body>
+  </head>
+  <body>
 
+    <P>Drag the mouse on the canvas</P>
+    <canvas id="canvas" height="400" width="400"></canvas>
 
-<P>Drag the mouse on the canvas</P>
-<canvas id="canvas" height="400" width="400"></canvas>
+    <label for='color-choice'>Color</label>
+    <input type = 'color' id='color-choice'>
 
-<label for='color-choice'>Color</label>
-<input type = 'color' id='color-choice'>
+    <label for='line-size'>Brush Width</label>
+    <input type = 'range' id='line-size'>
 
-<label for='line-size'>Brush Width</label>
-<input type = 'range' id='line-size'>
+  <script>
 
+    let canvas = document.querySelector('#canvas')
+    let context = canvas.getContext('2d')
 
-<script>
+    let colorInput = document.querySelector('#color-choice')
+    let lineWidthInput = document.querySelector('#line-size')
+    
+    // Keep track of whether the mouse button has been pressed down or not.
+    // Think of this as whether the user is drawing or not, is their brush on the canvas?
+    let mousedown = false 
 
-  let canvas = document.querySelector('#canvas')
-  let context = canvas.getContext('2d')
+    canvas.addEventListener('mousedown', function() {
+      mousedown = true
+    })
 
-  let colorInput = document.querySelector('#color-choice')
-  let lineWidthInput = document.querySelector('#line-size')
-  
-  // Keep track of whether the mouse button has been pressed down or not.
-  // Think of this as whether the user is drawing or not, is their brush on the canvas?
-  let mousedown = false 
+    canvas.addEventListener('mouseup', function() {
+      mousedown = false 
+    })
 
-  canvas.addEventListener('mousedown', function() {
-    mousedown = true
-  })
+    // If mouse leaves the canvas then stop drawing
+    canvas.addEventListener('mouseout', function() {
+      mousedown = false
+    })
 
-  canvas.addEventListener('mouseup', function() {
-    mousedown = false 
-  })
+    canvas.addEventListener('mousemove', function() {
 
-  // If mouse leaves the canvas then stop drawing
-  canvas.addEventListener('mouseout', function() {
-    mousedown = false
-  })
+      // If the mouse button is not pressed down, do not draw.
+      if (!mousedown) { return }
 
-  canvas.addEventListener('mousemove', function() {
+      // event is a built-in variable, contains the event that triggered this function
+      // get the x, y location of the event
+      let x = event.offsetX
+      let y = event.offsetY   //offsetX, offsetY, may not work in older browsers
 
-    // If the mouse button is not pressed down, do not draw.
-    if (!mousedown) { return }
+      //Draw a filled rectangle centered under the mouse click
+      //x, y is the top left corner, so shift up and left by 5 to center it under the mouse.
+      //context.fillRect(x-5, y-5, 10, 10)
 
-    // event is a built-in variable, contains the event that triggered this function
-    // get the x, y location of the event
-    let x = event.offsetX
-    let y = event.offsetY   //offsetX, offsetY, may not work in older browsers
+      let color = colorInput.value
+      let width = lineWidthInput.value
+      context.strokeStyle = color
+      //Begin path
+      context.beginPath()
+      //Use arch to describe where the circle is drawn
+      context.arc(x-5, y-5, width, 0, 2* Math.PI)
+      //Use stroke to draw
+      context.stroke()
+    })
 
-    //Draw a filled rectangle centered under the mouse click
-    //x, y is the top left corner, so shift up and left by 5 to center it under the mouse.
-    //context.fillRect(x-5, y-5, 10, 10)
+  </script>
 
-    let color = colorInput.value
-    let width = lineWidthInput.value
-    context.strokeStyle = color
-    //Begin path
-    context.beginPath()
-    //Use arch to describe where the circle is drawn
-    context.arc(x-5, y-5, width, 0, 2* Math.PI)
-    //Use stroke to draw
-    context.stroke()
-  })
-
-</script>
-
-</body>
+  </body>
 </html>
