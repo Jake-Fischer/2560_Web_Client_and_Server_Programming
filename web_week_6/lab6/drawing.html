@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
+
     <meta charset="UTF-8">
     <title>Mouse Events</title>
 
@@ -16,6 +16,7 @@
   </head>
   <body>
 
+    <!--Set up elements-->
     <P>Drag the mouse on the canvas</P>
     <canvas id="canvas" height="400" width="400"></canvas>
 
@@ -27,9 +28,11 @@
 
   <script>
 
+    //Setup canvas and context
     let canvas = document.querySelector('#canvas')
     let context = canvas.getContext('2d')
 
+    //Select inputs
     let colorInput = document.querySelector('#color-choice')
     let lineWidthInput = document.querySelector('#line-size')
     
@@ -64,9 +67,11 @@
       //x, y is the top left corner, so shift up and left by 5 to center it under the mouse.
       //context.fillRect(x-5, y-5, 10, 10)
 
+      //Create color and width values from input and then assign them 
       let color = colorInput.value
       let width = lineWidthInput.value
       context.strokeStyle = color
+
       //Begin path
       context.beginPath()
       //Use arch to describe where the circle is drawn
