@@ -3,7 +3,7 @@ https://github.com/Jake-Fischer/2560_Web_Client_and_Server_Programming/tree/main
 
 Live pages
 Drawing:
-file:///F:/Sync/Information/School/Spring%202021/ITEC%202560%20Web%20Client%20and%20Server%20Programming/web_week_6/lab6/drawing.html
+https://jake-fischer.github.io/2560_Web_Client_and_Server_Programming/web_week_6/lab6/drawing.html
 
 Bridges:
 https://jake-fischer.github.io/2560_Web_Client_and_Server_Programming/web_week_6/lab6/longest_US_bridges.html
