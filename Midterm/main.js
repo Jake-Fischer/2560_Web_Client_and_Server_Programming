@@ -2,41 +2,59 @@
 let test = document.querySelector('#test')
 test.innerHTML = 'Working'
 
+let update = 10000
+let maxFailedAttempts = 3 
 
-main() //First call
+let currencySelection = document.querySelector('#currency-select')
+let defaultCurrency = 'USD'
 
-function main(){
+let chartData = []
 
-    //Test data
-    let example_currency = 'USD'
-    let start = '2013-09-01'
-    let end = '2013-09-05'
+let rates = []
 
-    //Call the function, and assign what it returns to a variable
-    //This is where I am having problems, for some reason, nothing is being returned to datesvalues
-    let datesValues = getXPIRange(example_currency, start, end)
+let times = []
 
-    console.log(datesValues)
+getCurrentXPI(defaultCurrency, chartData, rates, times)
 
-    // setTimeout(function(){
-    //     console.log(datesValues)
-    // }, 3000);
-    // console.log(datesValues)
+function getCurrentXPI(currency, chartData, rates, times){
+    let url = `https://api.coindesk.com/v1/bpi/currentprice/${currency}.json` //URL string, with country code
+    fetch(url).then(res => { //Fetch Response
+        return res.json() //Put it in a json format
+    }).then((data) =>{ //Take that data, and do the following with it
+        
+        console.log(data)
+        
+        let bpiParagraph = document.querySelector('#BPI')
+        let timeParagraph = document.querySelector('#time-retreived')
 
-    //Chart tests
-    // let canvas = document.querySelector('#price-chart')
-    // let context = canvas.getContext('2d')
+        bpiParagraph.innerHTML = data.bpi.USD.rate
+        timeParagraph.innerHTML = data.time.updated
 
-    // let chart = new Chart(context, {
-    //     type: 'line',
-    //     data: values,
-    //     options: {
-    //         scales: {
-    //             xAxes: [{
-    //                 type: 'category',
-    //                 labels: dates
-    //             }]
-    //         }
-    //     }
-    // });
+        let currentRate = data.bpi.USD.rate
+        let currentTime = data.time.updated
+
+        let timeRate = {'x': currentTime, 'y': currentRate}
+
+        setTimeout( function() {
+
+            console.log(timeRate)
+
+            chartData.push(timeRate)
+
+            rates.push(currentRate)
+            times.push(currentTime)
+
+            console.log(chartData)
+            console.log(rates)
+            console.log(times)
+
+            chartPrice(rates,times)
+
+            getCurrentXPI(currency,chartData, rates, times)
+
+        }, 5000)
+    }).catch((error) =>{ //Error handling
+        console.log(error)
+        alert('An error has occured! Please try again.')
+    })
 }

@@ -23,16 +23,16 @@ function getXPIRange(currency, start, end){
 
         //Put both arrays into an array to be returned
         let datesValues = [dates,values]
+        //Log stuff for testing 
         console.log(dates)
         console.log(values)
         console.log(datesValues)
     
-        //return datesValues
+        return datesValues
 
     }).catch((error) =>{ //Error handling
         console.log(error)
         alert('An error has occured! Please try again.')
     })
-    return datesValues
 }
 
