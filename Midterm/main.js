@@ -17,7 +17,7 @@ function getCurrentXPI(currency, chartData, rates, times){
         return res.json() //Put it in a json format
     }).then((data) =>{ //Take that data, and do the following with it
         
-        console.log(data)
+        //console.log(data)
         //Show the price and time received
         let bpiParagraph = document.querySelector('#BPI')
         let timeParagraph = document.querySelector('#time-retreived')
@@ -25,14 +25,18 @@ function getCurrentXPI(currency, chartData, rates, times){
         timeParagraph.innerHTML = data.time.updated
 
         //Save price and time, and create timeRate object
-        let currentRate = data.bpi.USD.rate
+        let currentRateRaw = data.bpi.USD.rate
         let currentTime = data.time.updated
+        let currentRate = parseFloat(currentRateRaw.replace(/,/g,''))
+        //let currentTime = parseFloat(currentTimeRaw.replace(/,/g,''))
+        console.log(currentRate)
+        console.log(currentTime)
         let timeRate = {'x': currentTime, 'y': currentRate}
 
         setTimeout( function() {
 
             //log for testing
-            console.log(timeRate)
+            //console.log(timeRate)
 
             //Add timeRate to chartData
             chartData.push(timeRate)
@@ -65,3 +69,5 @@ function getCurrentXPI(currency, chartData, rates, times){
 // this chart will switch to tracking the new currency
 //2. When the program first starts, get the last ten minutes of activity and plot it first
 //3. Then run the main program, which will remove the last piece of data from the array and add the current price
+// effectivly updating the data from that point forward
+//4. Make it look pretty 

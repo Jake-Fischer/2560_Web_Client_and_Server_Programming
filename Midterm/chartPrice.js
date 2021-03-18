@@ -19,9 +19,9 @@ function chartPrice(rates,times) {
             scales:{
                 yAxes:[{
                     ticks:{
-                        beginAtZero: true, //Default grid structure, this must be changed
-                        suggestedMax: 100000,
-                        suggestedMin: 1000,
+                        beginAtZero: false, //Default grid structure, this must be changed
+                        suggestedMax: 60000,
+                        suggestedMin: 55000,
                         stepSize: 1,
                         maxTicksLimit:10
                     }
