@@ -19,28 +19,24 @@
 </head>
 
 <body>
-<div class="content m-4 center-block">
-    <h1>Enter Your information</h1>
-
-    <label for="currency">Currency</label><input id="currency-select" name="currency-select">
-    <br>
-    <button id="switch-currency">Switch Currency</button>    
-
+<div class="content m-4 center-block">   
     <h1>BPI</h1>
-
     <p>Here is the Bitcoin Price index</p>
 
     <h2 id="BPI"></h2>
-
     <h2 id="time-retreived"></h2>
 
-    <h2 id='test'></h2>
-
-    <div id='chart'></div>
+    <div id='pricechart'></div>
     <canvas id="price-chart"></canvas>
+    <br>
 
+    <label for="currency">Currency</label><input id="currency-select" name="currency-select">
+    <br>
+    <button id="switch-currency">Switch Currency</button>
+    <br>
 
-        
+    <div id='secondpricechart'></div>
+    <canvas id="second-price-chart"></canvas>
 </div>
 </body>
 
