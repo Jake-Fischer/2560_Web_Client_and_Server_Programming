@@ -6,13 +6,13 @@ async function getCurrentXPI(currency){
     return data
 }
 
-//Default data to start USD chart with 
+//Default data to start the updating chart with
 let chartData = [] //Will hold objects containing price and time variables
 let rates = [] //Will hold rates
 let times = [] //Will hold times
 
+//Create the first chart
 let ctx1 = document.querySelector('#price-chart');
-//Create the chart
 let lineChart = new Chart(ctx1, {
     type: 'line',
     data: {
@@ -20,15 +20,15 @@ let lineChart = new Chart(ctx1, {
         datasets: [
             {
                 label:'Price',
-                data: rates //Rates array is passed to this function
-            }               //Something is up with this, my x axis is filling with times just as it should
-        ]                   //But there are no points on my grid I have yet to figure this out
+                data: rates
+            }       
+        ]
     },
     options: {
         scales:{
             yAxes:[{
                 ticks:{
-                    beginAtZero: false, //Default grid structure, this must be changed
+                    beginAtZero: false, //Default grid structure
                     stepSize: 1,
                     maxTicksLimit:10
                 }
@@ -37,6 +37,7 @@ let lineChart = new Chart(ctx1, {
     }
 });
 
+//Create the second chart to hold historical data
 let ctx2 = document.querySelector('#second-price-chart');
 let lineChart2 = new Chart(ctx2, {
     type: 'line',
@@ -45,15 +46,15 @@ let lineChart2 = new Chart(ctx2, {
         datasets: [
             {
                 label:'Price',
-                data: rates //Rates array is passed to this function
-            }               //Something is up with this, my x axis is filling with times just as it should
-        ]                   //But there are no points on my grid I have yet to figure this out
+                data: rates 
+            }
+        ]
     },
     options: {
         scales:{
             yAxes:[{
                 ticks:{
-                    beginAtZero: false, //Default grid structure, this must be changed
+                    beginAtZero: false, //Default grid structure
                     stepSize: 1,
                     maxTicksLimit:10
                 }
@@ -62,10 +63,59 @@ let lineChart2 = new Chart(ctx2, {
     }
 }); 
 
+//Create arrays to hold historic rates and times
 let historicRates = []
 let historicTimes =[]
 
+//Call function to get historic rates from the API and graph them
+getHistoricRates()
+
+//Call initialize, which starts finding and plotting the live price of BTC every minute
+initialize()
+
+function getHistoricRates(){
+    //Get the proper dates
+    let yesterday = new Date()
+    yesterday.setDate(yesterday.getDate() -1)
+    yesterday = getISODate(yesterday)
+
+    let tenDaysAgo = new Date()
+    tenDaysAgo.setDate(tenDaysAgo.getDate() -10)
+    tenDaysAgo = getISODate(tenDaysAgo)
+
+    //Make the API call
+    let start = tenDaysAgo
+    let end = yesterday
+    let url = `https://api.coindesk.com/v1/bpi/historical/close/USD.json?start=${start}&end=${end}` //URL string, currency, start, and end are all fed too the function
+    fetch(url).then(res => { //Fetch Response
+        return res.json() //Put it in a json format
+    }).then((data) =>{ //Take that data, and do the following with it
+
+        //Take the keys, make them into an array called dates
+        let dates = Object.keys(data.bpi)
+        //Take the values, make them into an array called values
+        let values = Object.values(data.bpi)
+
+        //Set the chart data to the correct historical data and update the chart
+        lineChart2.data.labels = dates
+        lineChart2.data.datasets[0].data = values
+        lineChart2.update()
+
+        //Log stuff for testing 
+        console.log(dates)
+        console.log(values)
+    
+        
+
+    }).catch((error) =>{ //Error handling
+        console.log(error)
+        alert('An error has occured! Please try again.')
+    })
+}
+
 function getISODate(date){
+    //This is a function to get the correct date format from the date
+    //Found here - https://stackoverflow.com/questions/25159330/convert-an-iso-date-to-the-date-format-yyyy-mm-dd-in-javascript
     year = date.getFullYear();
     month = date.getMonth()+1;
     dt = date.getDate();
@@ -81,65 +131,9 @@ function getISODate(date){
     return ISODate
 }
 
-function getHistoricRates(){
-    let yesterday = new Date()
-    yesterday.setDate(yesterday.getDate() -1)
-    console.log(yesterday)
-    yesterday = getISODate(yesterday)
-    console.log(yesterday)
-    
-
-    let tenDaysAgo = new Date()
-    tenDaysAgo.setDate(tenDaysAgo.getDate() -10)
-    console.log(tenDaysAgo)
-    tenDaysAgo = getISODate(tenDaysAgo)
-    console.log(tenDaysAgo)
-
-
-    let start = tenDaysAgo
-    let end = yesterday
-    let url = `https://api.coindesk.com/v1/bpi/historical/close/USD.json?start=${start}&end=${end}` //URL string, currency, start, and end are all fed too the function
-    fetch(url).then(res => { //Fetch Response
-        return res.json() //Put it in a json format
-    }).then((data) =>{ //Take that data, and do the following with it
-
-        console.log(data)
-        
-        
-        
-
-        //Take the keys, make them into an array called dates
-        let dates = Object.keys(data.bpi)
-        //Take the values, make them into an array called values
-        let values = Object.values(data.bpi)
-
-        lineChart2.data.labels = dates
-        lineChart2.data.datasets[0].data = values
-        lineChart2.update()
-
-        //Put both arrays into an array to be returned
-        let datesValues = [dates,values]
-        //Log stuff for testing 
-        console.log(dates)
-        console.log(values)
-        console.log(datesValues)
-    
-        
-
-    }).catch((error) =>{ //Error handling
-        console.log(error)
-        alert('An error has occured! Please try again.')
-    })
-}
-
-getHistoricRates()
-
-main()
-
-function main(){
+function initialize(){
+    //This function begins the live price chart. It begins with a call, plots the first point, then calls update after 60 seconds
     getCurrentXPI('USD').then(data =>{
-        //console.log(data)
-    
         //Show the price and time received
         let bpiParagraph = document.querySelector('#BPI')
         let timeParagraph = document.querySelector('#time-retreived')
@@ -168,6 +162,7 @@ function main(){
 }
 
 function update(){
+    //This is the function that will run each minute. It makes a call, adds a point, and then after 60 seconds runs again.
     getCurrentXPI('USD').then(data =>{
         console.log(data)
     
@@ -201,6 +196,7 @@ function update(){
 }
 
 function addRate(rate, time){
+    //This is the function we use to update the live chart
     lineChart.data.labels.push(time)
     lineChart.data.datasets[0].data.push(rate)
     lineChart.update()
@@ -208,10 +204,10 @@ function addRate(rate, time){
 
 
 
+//This is all for when I figure out how to graph another currency concurently
+//As of now, I am having a hard time parsing the response for the correct data
 let currencySelection = document.querySelector('#currency-select')
 let secondCurrencyButton = document.querySelector('#switch-currency')
-
-
 
 secondCurrencyButton.addEventListener('click', function(){
     let currencyChosen = currencySelection.value
