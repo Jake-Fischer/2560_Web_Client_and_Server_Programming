@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">    <script href="countries.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
     <script async defer src = "main.js"></script>
-    <script async defer src='chartPrice.js'></script>
+    
 
 
  
@@ -21,10 +21,10 @@
 <body>
 <div class="content m-4 center-block">   
     <h1>BPI</h1>
-    <p>Here is the Bitcoin Price index</p>
-
-    <h2 id="BPI"></h2>
+    <p id='first-paragraph'>Here is the Bitcoin Price index as of (USD):</p>
     <h2 id="time-retreived"></h2>
+    <br>
+    <h2 id="BPI"></h2>
 
     <div id='pricechart'></div>
     <canvas id="price-chart"></canvas>
@@ -32,11 +32,13 @@
 
     <label for="currency">Currency</label><input id="currency-select" name="currency-select">
     <br>
-    <button id="switch-currency">Switch Currency</button>
+    <button id="switch-currency">Track Currency</button>
     <br>
 
     <div id='secondpricechart'></div>
     <canvas id="second-price-chart"></canvas>
+    <p id='second-paragraph'>Here is the Bitcoin Price index as of (USD):</p>
+
 </div>
 </body>
 
