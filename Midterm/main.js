@@ -50,7 +50,7 @@ let lineChart2 = new Chart(ctx2, {
         labels: times, //Times array is passed to this function
         datasets: [
             {
-                label:'10 Day Price History in USD',
+                label:'30 Day Price History in USD',
                 data: rates,
                 backgroundColor:'#6497b1',
                 borderColor: '#b3cde0',
