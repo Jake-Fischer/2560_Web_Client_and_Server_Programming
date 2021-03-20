@@ -1,15 +1,18 @@
-async function getCurrentXPI(currency){
-    //URL with USD as currency to start chart 1
-    let url = `https://api.coindesk.com/v1/bpi/currentprice/${currency}.json` //URL string, with country code
-    const response = await fetch(url)
-    const data = await response.json()
-    return data
-}
+//This program does the following
+//1. It plots and displays the price of btc over the past 30 days
+
+
+//For testing
+//let chartData = []
+//let altChartData = []
 
 //Default data to start the updating chart with
-let chartData = [] //Will hold objects containing price and time variables
-let rates = [] //Will hold rates
-let times = [] //Will hold times
+let rates = []
+let times = []
+
+//Data to start the alternative chart with
+let altRates = []
+let altTimes = []
 
 //Create the first chart
 let ctx1 = document.querySelector('#price-chart');
@@ -19,18 +22,20 @@ let lineChart = new Chart(ctx1, {
         labels: times, //Times array is passed to this function
         datasets: [
             {
-                label:'Price',
-                data: rates
+                label:'Price in USD',
+                data: rates,
+                backgroundColor:'#6497b1',
+                borderColor: '#b3cde0',
+                pointBackgroundColor: '#b3cde0',
+                pointBorderColor: '#b3cde0'
             }       
         ]
     },
-    options: {
+    options: { 
         scales:{
             yAxes:[{
                 ticks:{
                     beginAtZero: false, //Default grid structure
-                    stepSize: 1,
-                    maxTicksLimit:10
                 }
             }]
         }
@@ -45,8 +50,12 @@ let lineChart2 = new Chart(ctx2, {
         labels: times, //Times array is passed to this function
         datasets: [
             {
-                label:'Price',
-                data: rates 
+                label:'10 Day Price History in USD',
+                data: rates,
+                backgroundColor:'#6497b1',
+                borderColor: '#b3cde0',
+                pointBackgroundColor: '#b3cde0',
+                pointBorderColor: '#b3cde0'
             }
         ]
     },
@@ -55,17 +64,11 @@ let lineChart2 = new Chart(ctx2, {
             yAxes:[{
                 ticks:{
                     beginAtZero: false, //Default grid structure
-                    stepSize: 1,
-                    maxTicksLimit:10
                 }
             }]
         }
     }
-}); 
-
-//Create arrays to hold historic rates and times
-let historicRates = []
-let historicTimes =[]
+});
 
 //Call function to get historic rates from the API and graph them
 getHistoricRates()
@@ -73,18 +76,27 @@ getHistoricRates()
 //Call initialize, which starts finding and plotting the live price of BTC every minute
 initialize()
 
+//Request function
+async function getCurrentXPI(currency){
+    //URL with USD as currency to start chart 1
+    let url = `https://api.coindesk.com/v1/bpi/currentprice/${currency}.json` //URL string, with country code
+    const response = await fetch(url)
+    const data = await response.json()
+    return data
+}
+
 function getHistoricRates(){
     //Get the proper dates
     let yesterday = new Date()
     yesterday.setDate(yesterday.getDate() -1)
     yesterday = getISODate(yesterday)
 
-    let tenDaysAgo = new Date()
-    tenDaysAgo.setDate(tenDaysAgo.getDate() -10)
-    tenDaysAgo = getISODate(tenDaysAgo)
+    let thirtyDaysAgo = new Date()
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() -30)
+    thirtyDaysAgo = getISODate(thirtyDaysAgo)
 
     //Make the API call
-    let start = tenDaysAgo
+    let start = thirtyDaysAgo
     let end = yesterday
     let url = `https://api.coindesk.com/v1/bpi/historical/close/USD.json?start=${start}&end=${end}` //URL string, currency, start, and end are all fed too the function
     fetch(url).then(res => { //Fetch Response
@@ -100,13 +112,7 @@ function getHistoricRates(){
         lineChart2.data.labels = dates
         lineChart2.data.datasets[0].data = values
         lineChart2.update()
-
-        //Log stuff for testing 
-        console.log(dates)
-        console.log(values)
-    
         
-
     }).catch((error) =>{ //Error handling
         console.log(error)
         alert('An error has occured! Please try again.')
@@ -137,22 +143,18 @@ function initialize(){
         //Show the price and time received
         let bpiParagraph = document.querySelector('#BPI')
         let timeParagraph = document.querySelector('#time-retreived')
-        bpiParagraph.innerHTML = data.bpi.USD.rate
+        let disclaimerParagraph = document.querySelector('#disclaimer-paragraph')
+        bpiParagraph.innerHTML = data.bpi.USD.rate + ' (USD)'
         timeParagraph.innerHTML = data.time.updated
+        disclaimerParagraph.innerHTML = data.disclaimer
     
         //Save price and time, and create timeRate object
         let currentRate = data.bpi.USD.rate_float
         let currentTime = data.time.updated
-        console.log(currentRate)
-        console.log(currentTime)
-        let timeRate = {'x': currentTime, 'y': currentRate}
-    
-        chartData.push(timeRate)
-    
-        //log for testing
-        console.log(chartData)
-        console.log(rates)
-        console.log(times)
+
+        //For Testing
+        //let timeRate = {'x': currentTime, 'y': currentRate}
+        //chartData.push(timeRate)
         
         addRate(currentRate, currentTime)
     })
@@ -164,29 +166,20 @@ function initialize(){
 function update(){
     //This is the function that will run each minute. It makes a call, adds a point, and then after 60 seconds runs again.
     getCurrentXPI('USD').then(data =>{
-        console.log(data)
-    
         //Show the price and time received
         let bpiParagraph = document.querySelector('#BPI')
         let timeParagraph = document.querySelector('#time-retreived')
-        bpiParagraph.innerHTML = data.bpi.USD.rate
+        bpiParagraph.innerHTML = data.bpi.USD.rate + " (USD)"
         timeParagraph.innerHTML = data.time.updated
     
         //Save price and time, and create timeRate object
         let currentRate = data.bpi.USD.rate_float
         let currentTime = data.time.updated
-        console.log(currentRate)
-        console.log(currentTime)
 
         //This array is for testing and logging to the console, it is not used in the program
-        let timeRate = {'x': currentTime, 'y': currentRate}
-        chartData.push(timeRate)
+        //let timeRate = {'x': currentTime, 'y': currentRate}
+        //chartData.push(timeRate)
     
-        //log for testing
-        console.log(chartData)
-        console.log(rates)
-        console.log(times)
-
         //Update the chart
         addRate(currentRate, currentTime)
     })
@@ -202,61 +195,67 @@ function addRate(rate, time){
     lineChart.update()
 }
 
-
-
-//This is all for when I figure out how to graph another currency concurently
-//As of now, I am having a hard time parsing the response for the correct data
+//The following handles turning the second chart into a tracker for BTC
+//But with a different fiat currency
 let currencySelection = document.querySelector('#currency-select')
 let secondCurrencyButton = document.querySelector('#switch-currency')
+let altCurrencyParagraph = document.querySelector('#third-paragraph')
 
 secondCurrencyButton.addEventListener('click', function(){
     let currencyChosen = currencySelection.value
+    //Check to see if the currency selected is in the supported currency list
     if (checkCurrency(currencyChosen)){
-
+        //Reset the chart
+        altRates = []
+        altTimes =[]
+        lineChart2.data.labels = altTimes
+        lineChart2.data.datasets[0].data = altRates
+        lineChart2.update()
+        //Update text and label
+        altCurrencyParagraph.innerHTML = `Here is the price of BTC in (${currencyChosen}) as of:`
+        lineChart2.data.datasets[0].label = `Price in ${currencyChosen}`
+        //Call the the second chart updater to start updating the second chart
+        secondChartUpdater(currencyChosen)
     } else {
-        alert('Please enter a valid currency')
+        //Alert if currency is not supported
+        alert("Sorry, that currency doesn't seem to be supported.")
     }
-
-    secondChartUpdater(currencyChosen)
 })
 
 function secondChartUpdater(currency){
     getCurrentXPI(currency).then(data =>{
-        console.log(data)
-        
-        //Show the price and time received
-        // let bpiParagraph = document.querySelector('#BPI')
-        // let timeParagraph = document.querySelector('#time-retreived')
-        // bpiParagraph.innerHTML = data.bpi.USD.rate
-        // timeParagraph.innerHTML = data.time.updated
+        //Show the price and time received in the appropriate places on the page
+        let bpiParagraph = document.querySelector('#alt-BPI')
+        let timeParagraph = document.querySelector('#alt-time-retreived')
+        bpiParagraph.innerHTML = data.bpi[currency].rate + ` ${currency}`
+        timeParagraph.innerHTML = data.time.updated
     
         //Save price and time, and create timeRate object
-        let currentRate = data.bpi.USD.rate_float
+        let currentRate = data.bpi[currency].rate_float
         let currentTime = data.time.updated
-        
+
+        //This array is for testing and logging to the console, it is not used in the program
+        //let timeRate = {'x': currentTime, 'y': currentRate}
+        //altChartData.push(timeRate)
+
+        //Push to arrays
+        altRates.push(currentRate)
+        altTimes.push(currentTime)
     
-        //Add rate to rates array
-        secondRates.push(currentRate)
-        //Add times to times array
-        secondTimes.push(currentTime)
-    
-        //log for testing
-        console.log(secondRates)
-        console.log(secondTimes)
-    
-        //Call chart price with the times and the rates, this will redraw the chart with the current numbers
-        chartPrice(secondRates,secondTimes,2)
-    
-        //Call main again to restart
-        //getCurrentXPI('USD')
+        //Update the chart
+        lineChart2.data.labels = altTimes
+        lineChart2.data.datasets[0].data = altRates
+        lineChart2.update()
+
     })
     setTimeout( function(){
         secondChartUpdater(currency)
     },60000)
 }
 
+//Returns true or false
 function checkCurrency(currencyString) {
-
+    //Supported Currencies
     let supportedCurrenciesObj = [{"currency":"AED","country":"United Arab Emirates Dirham"},
     {"currency":"AFN","country":"Afghan Afghani"},
     {"currency":"ALL","country":"Albanian Lek"},
@@ -425,15 +424,18 @@ function checkCurrency(currencyString) {
     {"currency":"ZMW","country":"Zambian Kwacha"},
     {"currency":"ZWL","country":"Zimbabwean Dollar"}]
 
+    //Create array to store supported currency abreviations
     let supportedCurrencies =[]
 
+    //Loop through the above object, and grab all of the currency abreviations
     supportedCurrenciesObj.forEach( function(currencyObj){
         let currency = currencyObj.currency
         supportedCurrencies.push(currency)
     })
 
+    //Check to see if the user has entered something valid, returns true or false
     if (supportedCurrencies.indexOf(currencyString)){
-        console.log(currencyString)
+        //console.log(currencyString)
         return true
     } else {
         return false

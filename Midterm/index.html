@@ -4,40 +4,49 @@
 <head>
     <title>BPI</title>
     <meta charset="utf-8">
-   
+    
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">    <script href="countries.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
     <script async defer src = "main.js"></script>
-    
-
-
- 
-
-    
+    <link rel="stylesheet" type="text/css" href="styles.css">
 
 </head>
 
 <body>
 <div class="content m-4 center-block">   
-    <h1>BPI</h1>
-    <p id='first-paragraph'>Here is the Bitcoin Price index as of (USD):</p>
+    <p id='first-paragraph'>Here is the Bitcoin Price Index as of:</p>
     <h2 id="time-retreived"></h2>
     <br>
     <h2 id="BPI"></h2>
+    <br>
 
     <div id='pricechart'></div>
     <canvas id="price-chart"></canvas>
-    <br>
 
-    <label for="currency">Currency</label><input id="currency-select" name="currency-select">
+    <br>
+    <p>Enter an all caps abreviation of a currency to track the price of BTC in that currency.</p>
+    <a href="https://api.coindesk.com/v1/bpi/supported-currencies.json">Supported Currencies and Abreviations</a>
+    <br>
+    <br>
+    <label for="currency"></label><input id="currency-select" name="currency-select">
     <br>
     <button id="switch-currency">Track Currency</button>
+    <br>
+    <br>
+
+    <p id='third-paragraph'>The price movement for the past ten days in USD:</p>
+    <h2 id="alt-time-retreived"></h2>
+    <br>
+
+    <h2 id="alt-BPI"></h2>
     <br>
 
     <div id='secondpricechart'></div>
     <canvas id="second-price-chart"></canvas>
-    <p id='second-paragraph'>Here is the Bitcoin Price index as of (USD):</p>
+    <br>
+    <br>
+    <p id='disclaimer-paragraph'></p>
 
 </div>
 </body>
