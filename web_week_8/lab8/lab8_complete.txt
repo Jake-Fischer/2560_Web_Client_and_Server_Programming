@@ -1,0 +1,5 @@
+2.Vue understands that we are trying to render something called 'total' but it also understands
+that there is nothing in the instance (script) we created that can be used for 'total' so 
+it gives us a warning 
+
+3.
