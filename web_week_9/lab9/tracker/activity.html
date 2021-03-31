@@ -71,9 +71,10 @@
                     <input id="media2" class="form-check-input" type="radio" value='Digital' v-model='medium'>
                     <label class="form-check-label" for="media2">Digital</label>
                 </div>
-                
+
                 <br>
 
+                <!-- complete checkbox -->
                 <div class="form-group">
                     <label class="form-label" for="completed">Complete? </label>
                     <input id="completedCheck" type="checkbox" v-model='completed'>
@@ -82,6 +83,7 @@
                     </small>
                 </div>
 
+                <!-- notes input -->
                 <div class="form-group">
                     <label class="form-label" for="note">Notes:</label>
                     <!-- use v-model to connect this input to hours data -->
@@ -184,7 +186,7 @@
 
                 let date = new Date(this.dateString)
 
-                //Is the data a valid date? Is it today or in the past?
+                //Validation
                 if (!this.dateString || this.dateString ==='Invalid Date' || date > new Date()){
                     this.errors.push('Select a valid date.')
                 }
@@ -202,6 +204,7 @@
                     this.errors.push('Select a medium')
                 }
 
+                //Pass validation
                 if (this.errors.length === 0 ){
                     
                     //Create the record
@@ -257,14 +260,16 @@
                 }
             },
             totalHours() {
-                //Tally the total number of hours practiced and return
+                //Tally the total number of hours practiced and total for each activity
                 let total = 0
                 let sketchTotal = 0
                 let paintingTotal = 0
                 let drawingTotal = 0
 
+                //Create an array with all totals
                 let totalArray = []
 
+                //Loop through each record and add to total
                 this.activityRecords.forEach(function(record){
                     total = total + record.hours
                     if(record.type === 'Sketching'){
@@ -276,6 +281,7 @@
                     }
                 })
 
+                //Push everything to array and return
                 totalArray.push(total)
                 totalArray.push(sketchTotal)
                 totalArray.push(paintingTotal)
