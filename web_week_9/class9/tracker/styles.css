@@ -1,0 +1,23 @@
+#records {
+    max-height: 250px;
+    overflow: scroll;
+}
+
+.Sketching {
+    color: black;
+    background-color: green;
+}
+
+.Painting {
+    color: black;
+    background-color: blue;
+}
+
+.Drawing {
+    color: black;
+    background-color: purple;
+}
+
+[v-cloak] {
+    display: none;
+}
