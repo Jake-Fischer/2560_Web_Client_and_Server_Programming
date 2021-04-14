@@ -3,6 +3,7 @@
     
     <h2>Please make your Choice!</h2>
     <h3>{{question}}</h3>
+    <!-- <h3>{{questionID}}</h3> -->
     <br>
     <input type='radio' v-model='choice' v-bind:value='answer1' v-on:change='choiceMade'><label>{{answer1}}</label>
 
@@ -23,12 +24,11 @@ export default {
   data() {
     return {
       choice:'',
-      questionID:''
     }
   },
   methods: {
     choiceMade() {
-      this.$emit('answer-changed', this.questionID, this.choice)
+      this.$emit('answer-changed', this.choice, this.questionID )
     }
   }
 }

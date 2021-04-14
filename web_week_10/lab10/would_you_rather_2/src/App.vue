@@ -4,8 +4,8 @@
 
     <would-you-rather 
       v-for="question in questions"
-      v-bind:key="question"
-      v:bind:questionID="question.id"
+      v-bind:key="question.id"
+      v-bind:questionID="question.id"
       v-bind:question="question.question"
       v-bind:answer1="question.answer1"
       v-bind:answer2="question.answer2"
@@ -49,9 +49,6 @@ export default {
           answer2: 'New Sport',
           userAnswer:''
         }
-      ],
-      answers:[
-
       ]
     }
   },
@@ -60,6 +57,8 @@ export default {
     answerChanged(id, choice) {
       console.log(id)
       console.log(choice)
+      console.log(this.questions[0])
+      console.log(this.questions[id])
       // this.questions[id].userAnswer = choice
     }
   }
