@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     choiceMade() {
-      this.$emit('answer-changed', this.choice)
+      this.$emit('answer-changed', this.id, this.choice)
     }
   }
 }
