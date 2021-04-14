@@ -5,14 +5,14 @@
     <would-you-rather 
       v-for="question in questions"
       v-bind:key="question"
-      v:bind:id="question.id"
+      v:bind:questionID="question.id"
       v-bind:question="question.question"
       v-bind:answer1="question.answer1"
       v-bind:answer2="question.answer2"
       v-on:answer-changed="answerChanged"
     ></would-you-rather>
-    <li v-for='answer in answers'
-    v-bind:key='answer'>{{answer}}</li>
+    <li v-for='question in questions'
+    v-bind:key='question'>{{userAnswer}}</li>
   </div>
 </template>
 
@@ -26,6 +26,7 @@ export default {
   },
   data() {
     return {
+      //Array of questions, their ids, answers, and userAnswers
       questions:[
         {
           id: 0,
@@ -55,12 +56,11 @@ export default {
     }
   },
   methods: {
+    //When WouldYouRather emits answer-changed, this method is called with id and choice being passed to it
     answerChanged(id, choice) {
-      this.questions[id].userAnswer = choice
-      this.questions.forEach(q => {
-        answers.push(q.userAnswer)
-      });
-      
+      console.log(id)
+      console.log(choice)
+      // this.questions[id].userAnswer = choice
     }
   }
 }

@@ -15,19 +15,20 @@
 export default {
   name: 'WouldYouRather',
   props: {
-    id: Number,
+    questionID: Number,
     question: String,
     answer1: String,
     answer2: String
   },
   data() {
     return {
-      choice:''
+      choice:'',
+      questionID:''
     }
   },
   methods: {
     choiceMade() {
-      this.$emit('answer-changed', this.id, this.choice)
+      this.$emit('answer-changed', this.questionID, this.choice)
     }
   }
 }
