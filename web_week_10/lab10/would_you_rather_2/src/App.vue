@@ -12,9 +12,9 @@
       v-on:answer-changed="answerChanged"
     ></would-you-rather>
     <h1>I would rather...</h1>
-    <li v-for='question in questions'
-    v-bind:key='question'
-    >{{question.userAnswer}}</li>
+    <li v-for='answer in answers'
+    v-bind:key='answer'
+    >{{answer}}</li>
   </div>
 </template>
 
@@ -51,7 +51,8 @@ export default {
           answer2: 'New Sport',
           userAnswer:''
         }
-      ]
+      ],
+      answers: []
     }
   },
   methods: {
@@ -61,8 +62,17 @@ export default {
       console.log(choice)
       console.log(this.questions[0])
       console.log(this.questions[id])
-      this.questions[id].userAnswer = choice
+      this.questions[id].userAnswer = choice // change the user choice based on the id
       console.log(this.questions[id].userAnswer)
+      
+    }
+  },
+  computed: {
+    findCurrentAnswers(){
+      this.answers = [] // empty current answers array
+      this.questions.forEach(function(q){ //for each question do this  
+        this.answers.push(q.userAnswer)
+      })
     }
   }
 }
