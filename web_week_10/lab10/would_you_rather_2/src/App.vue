@@ -52,26 +52,28 @@ export default {
           userAnswer:''
         }
       ],
-      answers: []
+      answers: [] //Answers array to store user answers. 
     }
   },
   methods: {
     //When WouldYouRather emits answer-changed, this method is called with id and choice being passed to it
     answerChanged(choice, id) {
-      console.log(id)
-      console.log(choice)
-      console.log(this.questions[0])
-      console.log(this.questions[id])
+      // test logging
+      // console.log(id)
+      // console.log(choice)
+      // console.log(this.questions[0])
+      // console.log(this.questions[id])
       this.questions[id].userAnswer = choice // change the user choice based on the id
-      console.log(this.questions[id].userAnswer)
-      
+      this.findCurrentAnswers() // call find current answer
     }
   },
   computed: {
     findCurrentAnswers(){
       this.answers = [] // empty current answers array
-      this.questions.forEach(function(q){ //for each question do this  
-        this.answers.push(q.userAnswer)
+      this.questions.forEach(function(q){ //for each question do this 
+        if (q.userAnswer.length > 1){ // if the user answer is there
+          this.answers.push(q.userAnswer) //push it to the answers array
+        }
       })
     }
   }
