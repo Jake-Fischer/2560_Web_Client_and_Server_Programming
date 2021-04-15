@@ -63,8 +63,8 @@ export default {
       // console.log(choice)
       // console.log(this.questions[0])
       // console.log(this.questions[id])
-      this.questions[id].userAnswer = choice // change the user choice based on the id
-      this.findCurrentAnswers() // call find current answer
+      this.questions[id].userAnswer = choice
+      this.answers[id] = choice // change the user choice based on the id
     }
   },
   computed: {

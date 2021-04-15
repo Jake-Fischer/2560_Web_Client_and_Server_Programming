@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     choiceMade() {
+      //emits the choice and the question id to the parent
       this.$emit('answer-changed', this.choice, this.questionID )
     }
   }
@@ -42,5 +43,6 @@ h3 {
 
 .wyr{
   border:2px black solid;
+  background-color: grey;
 }
 </style>
