@@ -11,8 +11,10 @@
       v-bind:answer2="question.answer2"
       v-on:answer-changed="answerChanged"
     ></would-you-rather>
+    <h1>I would rather...</h1>
     <li v-for='question in questions'
-    v-bind:key='question'>{{userAnswer}}</li>
+    v-bind:key='question'
+    >{{question.userAnswer}}</li>
   </div>
 </template>
 
@@ -54,12 +56,13 @@ export default {
   },
   methods: {
     //When WouldYouRather emits answer-changed, this method is called with id and choice being passed to it
-    answerChanged(id, choice) {
+    answerChanged(choice, id) {
       console.log(id)
       console.log(choice)
       console.log(this.questions[0])
       console.log(this.questions[id])
-      // this.questions[id].userAnswer = choice
+      this.questions[id].userAnswer = choice
+      console.log(this.questions[id].userAnswer)
     }
   }
 }
