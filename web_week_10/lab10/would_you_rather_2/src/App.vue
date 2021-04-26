@@ -52,7 +52,7 @@ export default {
           userAnswer:''
         }
       ],
-      answers: [] //Answers array to store user answers. 
+      // answers: [] //Answers array to store user answers. 
     }
   },
   methods: {
@@ -64,17 +64,18 @@ export default {
       // console.log(this.questions[0])
       // console.log(this.questions[id])
       this.questions[id].userAnswer = choice
-      this.answers[id] = choice // change the user choice based on the id
+      // this.answers[id] = choice // change the user choice based on the id
     }
   },
   computed: {
-    findCurrentAnswers(){
-      this.answers = [] // empty current answers array
+    answers(){
+      let answers = [] // empty current answers array
       this.questions.forEach(function(q){ //for each question do this 
-        if (q.userAnswer.length > 1){ // if the user answer is there
-          this.answers.push(q.userAnswer) //push it to the answers array
+        if (q.userAnswer.length > 0){ // if the user answer is there. there could be a 1-letter answer - so check > 0
+          answers.push(q.userAnswer) //push it to the answers array
         }
       })
+      return answers
     }
   }
 }
